@@ -405,7 +405,7 @@ __help__ = """
   ──「 ANTIFLOOD 」──
 
 • `/antiflood`*:* [on/off] for avoiding spams and floods"""
-__mod_name__ = "Anti-Flood"
+__mod_name__ = "𝙰ɴᴛɪ-𝙵ʟᴏᴏᴅ"
 
 FLOOD_BAN_HANDLER = MessageHandler(
     Filters.all & ~Filters.status_update & Filters.chat_type.groups,
