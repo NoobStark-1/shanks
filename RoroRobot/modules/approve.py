@@ -225,6 +225,6 @@ That's what approvals are for - approve of trustworthy users to allow them to se
 • `/approved`*:* List all approved users.
 • `/unapproveall`*:* Unapprove *ALL* users in a chat. This cannot be undone.
 """
-__mod_name__ = "Approvals"
+__mod_name__ = "𝙰ᴘᴘʀᴏᴠᴀʟs"
 __command_list__ = ["approve", "unapprove", "approved", "approval"]
 __handlers__ = [APPROVE, DISAPPROVE, APPROVED, APPROVAL]
