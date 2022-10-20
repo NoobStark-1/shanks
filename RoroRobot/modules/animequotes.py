@@ -166,7 +166,8 @@ __help__ = """
 
 • `/quote`*:* for quotes
 • `/animequotes`*:* for anime quotes"""
-__mod_name__ = "「𝙰ɴɪᴍᴇǫᴜᴏᴛᴇs」"
+
+__mod_name__ = "𝙰ɴɪᴍᴇǫᴜᴏᴛᴇs"
 
 
 ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes, run_async=True)
