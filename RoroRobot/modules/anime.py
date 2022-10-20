@@ -193,4 +193,4 @@ dispatcher.add_handler(INDI_SEARCH_HANDLER)
 dispatcher.add_handler(ANIDL_SEARCH_HANDLER)
 dispatcher.add_handler(MEME_HANDLER)
 
-__mod_name__ = "Anime"
+__mod_name__ = "𝙰ɴɪᴍᴇ"
