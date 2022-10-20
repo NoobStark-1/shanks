@@ -415,7 +415,7 @@ This allows you to connect to a chat's database, and add things to it without th
 *Admin only:*
  • /allowconnect <yes/no>: allow a user to connect to a chat
 """
-__mod_name__ = "Connection"
+__mod_name__ = "𝙲ᴏɴɴᴇᴄᴛɪᴏɴ"
 
 CONNECT_CHAT_HANDLER = CommandHandler(
     "connect", connect_chat, pass_args=True, run_async=True
