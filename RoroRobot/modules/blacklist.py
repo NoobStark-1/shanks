@@ -474,7 +474,7 @@ Blacklist sticker is used to stop certain stickers. Whenever a sticker is sent, 
 Note:
  • <sticker link> can be `https://t.me/addstickers/<sticker>` or just `<sticker>` or reply to the sticker message
 """
-__mod_name__ = "Blacklists"
+__mod_name__ = "𝙱ʟᴀᴄᴋʟɪsᴛs"
 
 BLACKLIST_HANDLER = DisableAbleCommandHandler(
     "blacklist",
