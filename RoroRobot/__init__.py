@@ -21,12 +21,12 @@ from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid, ChannelInv
 from pyrogram.types import Chat, User
 from ptbcontrib.postgres_persistence import PostgresPersistence
 
-from RoroRobot.services.quoteapi import Quotly
+# from RoroRobot.services.quoteapi import Quotly
 
 
 StartTime = time.time()
 
-quotly = Quotly()
+# quotly = Quotly()
 
 def get_user_list(__init__, key):
     with open("{}/RoroRobot/{}".format(os.getcwd(), __init__), "r") as json_file:
