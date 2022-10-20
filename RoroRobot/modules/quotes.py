@@ -36,7 +36,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from RoroRobot.utils.errors import capture_err
-from RoroRobot import arq, pgram, LOGGER
+from RoroRobot import arq,pbot as pgram, LOGGER
 
 Cutiepii_PYRO_Q = filters.command(["quote", "q"])
 
