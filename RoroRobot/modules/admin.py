@@ -884,7 +884,7 @@ dispatcher.add_handler(SET_TITLE_HANDLER)
 dispatcher.add_handler(ADMIN_REFRESH_HANDLER)
 
 __help__ = """
-  ──「 ADMIN 」──
+  ──「 𝙰ᴅᴍᴋɴs 」──
 
  • /admins*:* list of admins in the chat
 *Admins only:*
@@ -908,7 +908,7 @@ __help__ = """
 and Automatically openned at 6 am(IST) To Prevent Night Spams.
 ⚠️ `Read from top`
 """
-__mod_name__ = "Admins"
+__mod_name__ = "𝙰ᴅᴍɪɴs"
 __command_list__ = [
     "setdesc"
     "setsticker"
