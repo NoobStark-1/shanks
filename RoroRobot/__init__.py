@@ -21,6 +21,9 @@ from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid, ChannelInv
 from pyrogram.types import Chat, User
 from ptbcontrib.postgres_persistence import PostgresPersistence
 
+from RoroRobot.services.quoteapi import Quotly
+
+
 StartTime = time.time()
 
 quotly = Quotly()
