@@ -151,7 +151,7 @@ def __user_info__(user_id):
 def __gdpr__(user_id):
     end_afk(user_id)
 
-__mod_name__ = "Afk"
+__mod_name__ = "𝙰ғᴋ"
 __help__ = """
   When marked as AFK, any mentions will be replied to with a message stating that you're not available!
  • `/afk <reason>`*:* Mark yourself as AFK.
