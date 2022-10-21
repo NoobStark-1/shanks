@@ -1,3 +1,4 @@
+
 import html
 import os
 import json
@@ -12,7 +13,7 @@ from sys import argv
 from typing import Optional
 from telegram import __version__ as peler
 from platform import python_version as memek
-from RoroRobot import (
+from KannaKamui import (
     ALLOW_EXCL,
     CERT_PATH,
     DONATION_LINK,
@@ -82,41 +83,47 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-────「 [Roronoa Zoro]({}) 」────
-やあ *"How did I end up following a Captain like this" {} - San!*
-* I am Roronoa Zoro, also known as "Pirate Hunter" Zoro, I am a combatant of the Straw Hat Pirates*
+────「 [Sʜᴀɴᴋs【天皇】]({}) 」────
+やあ *{} - San!*
+*Hᴇʏ Tʜᴇʀᴇ!!
 
-❍ *Version* : 3.10.6
-❍ *Council Uptime* : {}
+I Aᴍ Sʜᴀɴᴋs【天皇】 Aɴ Aɴɪᴍᴇ Tʜᴇᴍᴇ Bᴀsᴇᴅ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ Bᴜɪʟᴛ Tᴏ Mᴀɴᴀɢᴇ Yᴏᴜʀ Gʀᴏᴜᴘ Jᴜsᴛ Lɪᴋᴇ A Eᴍᴘᴇʀᴏʀ Dᴏᴇs Iɴ Tʜᴇ Gʀᴀɴᴅ Lɪɴᴇ!
+
+Nᴏᴡ Tʜᴀᴛ Yᴏᴜ Pᴏɪɴᴛᴇᴅ Tʜᴇ Gᴜɴ, Wᴏᴜʟᴅ Yᴏᴜ Rɪsᴋ Yᴏᴜʀ Lɪғᴇ Fᴏʀ Iᴛ!!
+
+Usᴇ /help Tᴏ ɢᴏ Tʜʀᴏᴜɢʜ Mʏ Cᴏᴍᴍᴀɴᴅs ✨✨*
+
+❍ *Python* : 3.10.6
+❍ *Uptime* : {}
 
 ➢ *Try The More Options Buttons Below To See The Available Commands* ××
 """
 
 PHOTO = (
-      "https://telegra.ph/file/4a4b4cf7ae29499194051.jpg",
-      "https://telegra.ph/file/b07a9cb3cca0ae94edd26.jpg",
-      "https://telegra.ph/file/e15898b918faa321e77c6.jpg",
-      "https://telegra.ph/file/6c0574f4cfdb4c7f0fa4c.jpg",
+      "https://telegra.ph/file/80b7a80f7ea7b6071838f.jpg",
+      "https://telegra.ph/file/521ad2f7896f1c46218f8.jpg",
+      "https://telegra.ph/file/91c6e8287921a4b227ea7.jpg",
+      "https://telegra.ph/file/1bd0c14f7d550c81b0325.jpg",
 )
 
 buttons = [
     [
-        InlineKeyboardButton(text="ᴀᴅᴅ ᴍᴇ", url="t.me/ZoroRobot?startgroup=new"),
+        InlineKeyboardButton(text="➕️ Add Sʜᴀɴᴋs【天皇】 To Your Chat ➕️", url="t.me/ShanksRobot?startgroup=new"),
     ],
     [
-        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url="t.me/NexusXSupport"),
-        InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇs", url="t.me/ZoroUpdates"),
+        InlineKeyboardButton(text="• Support •", url="t.me/kanao_support"),
+        InlineKeyboardButton(text="About", callback_data="Kanna_"),
     ],
     [
-        InlineKeyboardButton(text="ᴍᴏʀᴇ ᴏᴘᴛɪᴏɴs", callback_data="Kaguya_"),
+        InlineKeyboardButton(text="Help & Cmds ❔", callback_data="help_back"),
     ],    
 ]
 
 HELP_STRINGS = """
 Click on the button bellow to get description about specifics command."""
 
-KAGUYA_IMG = "https://telegra.ph/file/bf2215fc9341575efb0aa.jpg"
-KaguyaSTART = "https://telegra.ph/file/16b94be672eb5878cdd6d.mp4"
+Kanna_IMG = "https://telegra.ph/file/8bc2fa25019c8cd3576e4.jpg"
+KannaSTART = "https://telegra.ph/file/52715f72b6d72144e5790.mp4"
 
 
 
@@ -230,14 +237,14 @@ def start(update: Update, context: CallbackContext):
                 disable_web_page_preview=False,
             )
     else:
-        update.effective_message.reply_text("[Kon'ichiwa Am Kaguya Shinomiya I'll Protect You From The Guilty](https://telegra.ph/file/02ff19d802c4ce367dd1c.jpg)",
+        update.effective_message.reply_text("[Orewa akagamai no shanks](https://telegra.ph/file/6a6d87dc751c072cf502e.jpg)",
 reply_markup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
-                                "sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/NexusXSupport"),
+                                "• Support •", url=f"https://t.me/kanao_support"),
                             InlineKeyboardButton(
-                                "ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/ZoroUpdates")
+                                "• Updates •", url=f"https://t.me/Shanks_updates")
                         ],
                     ]
                 ),
@@ -308,11 +315,11 @@ def error_callback(update: Update, context: CallbackContext):
 
 
 
-def Kaguya_about_callback(update, context):
+def Kanna_about_callback(update, context):
     query = update.callback_query
-    if query.data == "Kaguya_":
+    if query.data == "Kanna_":
         query.message.edit_text(
-            text="⤀ Hoi I'm Kaguya Shinomiya, a powerful group management bot built to help you manage your group easily. ⬴"
+            text="⤀ Hoi I'm Sʜᴀɴᴋs【天皇】, a powerful group management bot built to help you manage your group easily. ⬴"
             "\n➢ I can restrict users."
             "\n➢ I can greet users with customizable welcome messages and even set a group's rules."
             "\n➢ I have an advanced anti-flood system."
@@ -324,23 +331,16 @@ def Kaguya_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="ᴀᴅᴍɪɴs", callback_data="admin_"),
-                    InlineKeyboardButton(text="ɴᴏᴛᴇs", callback_data="about_notes"),
+                    InlineKeyboardButton(text="Support", url="t.me/Kanao_support"),
+                    InlineKeyboardButton(text="Developer", url="t.me/CuteRishu"),
                  ],
                  [
-                    InlineKeyboardButton(text="ꜱᴜᴘᴘᴏʀᴛ", url="t.me/NexusXSUPPORT"),
-                    InlineKeyboardButton(text="ᴄʀᴇᴅɪᴛs", callback_data="about_credits"),
-                 ],
-                 [ 
-                    InlineKeyboardButton(text=" ʜᴇʟᴘ", callback_data="help_back"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Kaguya_back")
+                    InlineKeyboardButton(text="• Back •", callback_data="kanna_back")
                  ]
                 ]
             ),
         )
-    elif query.data == "Kaguya_back":
+    elif query.data == "Kanna_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -361,7 +361,7 @@ def about_admin(update, context):
             text="""  
   *⤀ Let's make your group bit effective ⤀*
 
-  Congragulations, Zoro Robot now ready to manage your group.
+  Congragulations, Sʜᴀɴᴋs【天皇】 now ready to manage your group.
 
   *Admin Tools*
   Basic Admin tools help you to protect and powerup your group.
@@ -375,12 +375,12 @@ def about_admin(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Kaguya_")
+                    InlineKeyboardButton(text="• Back •", callback_data="kanna_")
                  ]
                 ]
             ),
         )
-    elif query.data == "Kaguya_back":
+    elif query.data == "Kanna_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -408,12 +408,12 @@ def about_notes(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Kaguya_")
+                    InlineKeyboardButton(text="• Back •", callback_data="Kanna_")
                  ]
                 ]
             ),
         )
-    elif query.data == "Kaguya_back":
+    elif query.data == "Kanna_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -431,26 +431,23 @@ def about_credits(update, context):
     if query.data == "about_credits":
         query.message.edit_text(
             text="""  
-  *⤀ Credits for Zoro ⬴*
+  *⤀ Credits for Sʜᴀɴᴋs【天皇】 ⬴*
 
-  Here Developers Making And Give Inspiration For Made The Kaguya Robot""",
+  Hardwork Put In To Make Sʜᴀɴᴋs【天皇】 By""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                        InlineKeyboardButton(text="Unknown", url="https://t.me/XtheAnonymous"),
+                        InlineKeyboardButton(text="Rishu", url="https://t.me/CuteRishu"),
                  ],
                  [
-                        InlineKeyboardButton(text="XULTIM8", url="https://t.me/XULTIM8"),
-                 ], 
-                 [
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Kaguya_")
+                    InlineKeyboardButton(text="• Back •", callback_data="Kanna_")
                  ]
                 ]
             ),
         )
-    elif query.data == "Kaguya_back":
+    elif query.data == "Kanna_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -484,7 +481,7 @@ def Source_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Go Back", callback_data="Kaguya_")
+                    InlineKeyboardButton(text="Go Back", callback_data="Kanna_")
                  ]
                 ]
             ),
@@ -563,7 +560,7 @@ def get_help(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="ʜᴇʟᴘ",
+                                text="• Help •",
                                 url="t.me/{}?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
@@ -580,7 +577,7 @@ def get_help(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="ʜᴇʟᴘ",
+                            text="• Help •",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
                     ]
@@ -651,7 +648,7 @@ def help_button(update, context):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back"),
+                            InlineKeyboardButton(text="• Back •", callback_data="help_back"),
                         ]
                     ]
                 ),
@@ -800,7 +797,7 @@ def get_settings(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="sᴇᴛᴛɪɴɢs",
+                                text="Settings",
                                 url="t.me/{}?start=stngs_{}".format(
                                     context.bot.username, chat.id
                                 ),
@@ -825,7 +822,7 @@ def donate(update: Update, context: CallbackContext):
             DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
-        if OWNER_ID != 5148561602:
+        if OWNER_ID != 5205602399:
             update.effective_message.reply_text(
                 "I'm free for everyone ❤️ If you wanna make me smile, just join"
                 "[My Channel]({})".format(DONATION_LINK),
@@ -874,7 +871,7 @@ def main():
         try:
             dispatcher.bot.sendMessage(
                 f"@{SUPPORT_CHAT}", 
-                f"""[Am Back to my job](https://telegra.ph/file/a59450b213a009c20518d.jpg)""",
+                f"""[Search for one Piece!](https://telegra.ph/file/83f02fe25cc35cfeeac6a.jpg)""",
                 parse_mode=ParseMode.MARKDOWN,
 
             reply_markup=InlineKeyboardMarkup(
@@ -885,9 +882,9 @@ def main():
 
                        InlineKeyboardButton(
 
-                             text="[► Summon Me ◄]",
+                             text="Off-Topic",
 
-                             url=f"t.me/ZoroRobot?startgroup=true"),
+                             url=f"t.me/void_ivq"),
 
 
                      ] 
@@ -917,7 +914,7 @@ def main():
     )
 
     about_callback_handler = CallbackQueryHandler(
-        Kaguya_about_callback, pattern=r"Kaguya_", run_async=True
+        Kanna_about_callback, pattern=r"Kanna_", run_async=True
     )
     about_admin_callback = CallbackQueryHandler(
         about_admin, pattern=r"admin_", run_async=True
