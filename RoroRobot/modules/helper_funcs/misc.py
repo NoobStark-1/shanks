@@ -1,11 +1,19 @@
-from  uuid  import  uuid4
-
 from math import ceil
 from typing import Dict, List
+from uuid import uuid4
+
+from telegram import (
+    MAX_MESSAGE_LENGTH,
+    Bot,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InlineQueryResultArticle,
+    InputTextMessageContent,
+    ParseMode,
+)
+from telegram.error import TelegramError
 
 from RoroRobot import NO_LOAD
-from telegram import MAX_MESSAGE_LENGTH, Bot, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, InlineQueryResultArticle, InputTextMessageContent
-from telegram.error import TelegramError
 
 
 class EqInlineKeyboardButton(InlineKeyboardButton):
@@ -32,8 +40,9 @@ def split_message(msg: str) -> List[str]:
         else:
             result.append(small_msg)
             small_msg = line
-    # Else statement at the end of the for loop, so append the leftover string.
-    result.append(small_msg)
+    else:
+        # Else statement at the end of the for loop, so append the leftover string.
+        result.append(small_msg)
 
     return result
 
@@ -71,17 +80,17 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
     if calc in [1, 2]:
         pairs.append((modules[-1],))
 
-    max_num_pages = ceil(len(pairs) / 7)
+    max_num_pages = ceil(len(pairs) / 4)
     modulo_page = page_n % max_num_pages
 
     # can only have a certain amount of buttons side by side
     if len(pairs) > 3:
-        pairs = pairs[modulo_page * 7 : 7 * (modulo_page + 1)] + [
+        pairs = pairs[modulo_page * 6 : 6 * (modulo_page + 1)] + [
             (
                 EqInlineKeyboardButton(
                     "◁", callback_data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                EqInlineKeyboardButton("Back", callback_data="Kaguya_back"),
+                EqInlineKeyboardButton("• ʜᴏᴍᴇ •", callback_data="fallen_back"),
                 EqInlineKeyboardButton(
                     "▷", callback_data="{}_next({})".format(prefix, modulo_page)
                 ),
@@ -89,7 +98,7 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
         ]
 
     else:
-        pairs += [[EqInlineKeyboardButton("Back", callback_data="Kaguya_back")]]
+        pairs += [[EqInlineKeyboardButton("• ʙᴀᴄᴋ •", callback_data="fallen_back")]]
 
     return pairs
 
@@ -114,6 +123,7 @@ def article(
         ),
         reply_markup=reply_markup,
     )
+
 
 def send_to_list(
     bot: Bot, send_to: list, message: str, markdown=False, html=False
@@ -144,12 +154,14 @@ def build_keyboard(buttons):
 
 
 def revert_buttons(buttons):
-    return "".join(
-        "\n[{}](buttonurl://{}:same)".format(btn.name, btn.url)
-        if btn.same_line
-        else "\n[{}](buttonurl://{})".format(btn.name, btn.url)
-        for btn in buttons
-    )
+    res = ""
+    for btn in buttons:
+        if btn.same_line:
+            res += "\n[{}](buttonurl://{}:same)".format(btn.name, btn.url)
+        else:
+            res += "\n[{}](buttonurl://{})".format(btn.name, btn.url)
+
+    return res
 
 
 def build_keyboard_parser(bot, chat_id, buttons):
@@ -165,43 +177,28 @@ def build_keyboard_parser(bot, chat_id, buttons):
     return keyb
 
 
+def user_bot_owner(func):
+    @wraps(func)
+    def is_user_bot_owner(bot: Bot, update: Update, *args, **kwargs):
+        user = update.effective_user
+        if user and user.id == OWNER_ID:
+            return func(bot, update, *args, **kwargs)
+        else:
+            pass
+
+    return is_user_bot_owner
+
+
+def build_keyboard_alternate(buttons):
+    keyb = []
+    for btn in buttons:
+        if btn[2] and keyb:
+            keyb[-1].append(InlineKeyboardButton(btn[0], url=btn[1]))
+        else:
+            keyb.append([InlineKeyboardButton(btn[0], url=btn[1])])
+
+    return keyb
+
+
 def is_module_loaded(name):
     return name not in NO_LOAD
-
-def convert_gif(input):
-    """Function to convert mp4 to webm(vp9)"""
-
-    vid = cv2.VideoCapture(input)
-    height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
-    width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
-
-    #check height and width to scale
-    if width > height:
-        width = 512
-        height = -1
-    elif height > width:
-        height = 512
-        width = -1
-    elif width == height:
-        width = 512
-        height = 512
-
-
-    converted_name = 'kangsticker.webm'
-
-    (
-        ffmpeg
-            .input(input)
-            .filter('fps', fps=30, round="up")
-            .filter('scale', width=width, height=height)
-            .trim(start="00:00:00", end="00:00:03", duration="3")
-            .output(converted_name, vcodec="libvpx-vp9", 
-                        **{
-                            #'vf': 'scale=512:-1',
-                            'crf': '30'
-                            })
-            .overwrite_output()
-            .run()
-    )
-
-    return converted_name
