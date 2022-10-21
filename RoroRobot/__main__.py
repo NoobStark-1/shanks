@@ -13,7 +13,7 @@ from sys import argv
 from typing import Optional
 from telegram import __version__ as peler
 from platform import python_version as memek
-from KannaKamui import (
+from RoroRobot import (
     ALLOW_EXCL,
     CERT_PATH,
     DONATION_LINK,
