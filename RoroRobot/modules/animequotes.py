@@ -1,3 +1,8 @@
+#ɪғ ʏᴏᴜ ғᴏᴜɴᴅ ɪɴ ᴀɴʏ ᴇʀʀᴏʀs ᴛʜᴀɴ ᴘʟᴢ ᴄᴏɴᴛᴀᴄᴛ @SIXTH_H0KAGE
+#sᴜᴘᴘᴏʀᴛ :- @kakashi_bots_support
+#ᴜᴘᴅᴀᴛᴇs :- @kakashi_bots_updates
+#ɴᴇᴛᴡᴏʀᴋ :- @Otaku_Binge
+
 import json
 import requests
 import html
@@ -6,8 +11,9 @@ import time
 
 from RoroRobot import dispatcher
 from RoroRobot.modules.disable import DisableAbleCommandHandler
-from RoroRobot.modules.helper_funcs.chat_status import (is_user_admin)
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async, CallbackQueryHandler
+from RoroRobot.modules.helper_funcs.chat_status import (is_user_admin)
+from RoroRobot.modules.helper_funcs.extraction import extract_user
 from telegram import ParseMode, Update, InlineKeyboardMarkup, InlineKeyboardButton, replymarkup, ChatPermissions
 from telegram.error import BadRequest
 
@@ -23,6 +29,8 @@ def anime_quote():
     character = dic["character"]
     anime = dic["anime"]
     return quote, character, anime
+
+@run_async
 def quotes(update: Update, context: CallbackContext):
     message = update.effective_message
     quote, character, anime = anime_quote()
@@ -36,6 +44,7 @@ def quotes(update: Update, context: CallbackContext):
         reply_markup=keyboard,
         parse_mode=ParseMode.HTML,
     )
+
 def change_quote(update: Update, context: CallbackContext):
     query = update.callback_query
     chat = update.effective_chat
@@ -48,13 +57,22 @@ def change_quote(update: Update, context: CallbackContext):
             callback_data="quote_change")]])
     message.edit_text(msg, reply_markup=keyboard,
                       parse_mode=ParseMode.HTML)
-    
+ 
+@run_async   
 def animequotes(update: Update, context: CallbackContext):
     message = update.effective_message
     name = message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
-    reply_photo = message.reply_to_message.reply_photo if message.reply_to_message else message.reply_photo
-    reply_photo(
-        random.choice(QUOTES_IMG))
+    keyboard = [[InlineKeyboardButton(text="Change", callback_data="changek_quote")]]
+    message.reply_photo(random.choice(QUOTES_IMG),reply_markup=InlineKeyboardMarkup(keyboard))
+
+def changek_quote(update: Update, context: CallbackContext):
+    query = update.callback_query
+    chat = update.effective_chat
+    message = update.effective_message
+    keyboard = [[InlineKeyboardButton(text="Change", callback_data="quotek_change")]]
+    message.reply_photo(random.choice(QUOTES_IMG),reply_markup=InlineKeyboardMarkup(keyboard))
+
+
 QUOTES_IMG = (
       "https://i.imgur.com/Iub4RYj.jpg", 
       "https://i.imgur.com/uvNMdIl.jpg", 
@@ -120,65 +138,26 @@ QUOTES_IMG = (
       "https://i.imgur.com/zvcxSOX.jpg", 
       "https://i.imgur.com/FO7bApW.jpg", 
       "https://i.imgur.com/KK06gwg.jpg", 
-      "https://i.imgur.com/6lG4tsO.jpg",
-      "https://i.imgur.com/D6Gv66Q.jpg",
-      "https://i.imgur.com/Nh6Sw54.jpg",
-      "https://i.imgur.com/5hDvwKk.jpg",
-      "https://i.imgur.com/ygtzH8d.jpg",
-      "https://i.imgur.com/1SH7Bat.jpg",
-      "https://i.imgur.com/IZjXBqy.jpg",
-      "https://i.imgur.com/KcX1lEz.jpg",
-      "https://i.imgur.com/EOVd1wk.jpg",
-      "https://i.imgur.com/eNmTqYK.jpg",
-      "https://i.imgur.com/6sZeQ3N.jpg",
-      "https://i.imgur.com/86F0bqf.jpg",
-      "https://i.imgur.com/OL8gGX0.jpg",
-      "https://i.imgur.com/VGjYXHX.jpg",
-      "https://i.imgur.com/tujl3rU.jpg",
-      "https://i.imgur.com/wnBNcyz.jpg",
-      "https://i.imgur.com/lQK56UX.jpg",
-      "https://i.imgur.com/zRYTJkl.jpg",
-      "https://i.imgur.com/7tgPw30.jpg",
-      "https://i.imgur.com/WuYLzme.jpg",
-      "https://i.imgur.com/caXj5DD.jpg",
-      "https://i.imgur.com/9tIoFy5.jpg",
-      "https://i.imgur.com/TkndZgn.png",
-      "https://i.imgur.com/0iEf6es.jpg",
-      "https://i.imgur.com/LIzfbyi.png",
-      "https://i.imgur.com/OER5Zr9.jpg",
-      "https://i.imgur.com/NWxuHwV.jpg",
-      "https://i.imgur.com/LN4sCCI.jpg",
-      "https://i.imgur.com/uBE1wnj.jpg",
-      "https://i.imgur.com/F8nF3Ii.jpg",
-      "https://i.imgur.com/6ePhNPO.jpg",
-      "https://i.imgur.com/tsQLjFL.jpg",
-      "https://i.imgur.com/VT1Fep3.jpg",
-      "https://i.imgur.com/UzYzQXX.jpg",
-      "https://i.imgur.com/S81p8Vh.jpg",
-      "https://i.imgur.com/ZdMIpyn.jpg",
-      "https://i.imgur.com/r7MmFZI.jpg",
-      "https://i.postimg.cc/LsGJsMd6/Itachie.jpg"
+      "https://i.imgur.com/6lG4tsO.jpg"
       
       )    
 
-__help__ = """
-  ──「 ANIMEQUOTES 」──
-
-• `/quote`*:* for quotes
-• `/animequotes`*:* for anime quotes"""
-
-__mod_name__ = "𝙰ɴɪᴍᴇǫᴜᴏᴛᴇs"
-
-
-ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes, run_async=True)
-QUOTES_HANDLER = DisableAbleCommandHandler("quote", quotes, run_async=True)
+ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes)
+QUOTES_HANDLER = DisableAbleCommandHandler("quote", quotes)
 
 CHANGE_QUOTE = CallbackQueryHandler(
     change_quote, pattern=r"change_.*")
 QUOTE_CHANGE = CallbackQueryHandler(
     change_quote, pattern=r"quote_.*")
+CHANGEK_QUOTE = CallbackQueryHandler(
+    changek_quote, pattern=r"changek_.*")
+QUOTEK_CHANGE = CallbackQueryHandler(
+    changek_quote, pattern=r"quotek_.*")
+
 dispatcher.add_handler(CHANGE_QUOTE)
 dispatcher.add_handler(QUOTE_CHANGE)
+dispatcher.add_handler(CHANGEK_QUOTE)
+dispatcher.add_handler(QUOTEK_CHANGE)
 dispatcher.add_handler(ANIMEQUOTES_HANDLER)
 dispatcher.add_handler(QUOTES_HANDLER)
 
@@ -195,3 +174,11 @@ __handlers__ = [
     QUOTES_HANDLER
 
 ]
+
+__mod_name__ = "𝙰ɴɪᴍᴇ-𝚀ᴜᴏᴛᴇs"
+__help__ = """
+*AnimeQuotes & Quotes*
+
+⦿ /animequotes - gives a random anime quote
+⦿ /quote - gives a random quote
+"""
